@@ -45,4 +45,4 @@ jobs:
           script: |
             docker pull tesla59/gomq:latest
             docker stop gomq
-            docker run -p 7777:7777 --name gomq tesla59/gomq:latest
+            docker run --rm -p 7777:7777 --name gomq tesla59/gomq:latest
