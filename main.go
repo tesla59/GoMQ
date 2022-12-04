@@ -5,18 +5,15 @@ import (
 )
 
 var (
-	router *gin.Engine
+	Router *gin.Engine
 )
 
 func main() {
-	router = gin.Default()
+	Router = gin.Default()
 
-	router.POST("/newMessage", func(ctx *gin.Context) {
-		var requestBody message
-		err := ctx.BindJSON(&requestBody)
-		failOnError(err, "Cannot Bind Request Body")
-		ctx.JSON(200, "{ 'status': 'OK' }")
-	})
+	// Init Routers
+	InitRouter()
 
-	router.Run(":7777")
+	// Start serving
+	Router.Run(":7777")
 }
