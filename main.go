@@ -5,13 +5,6 @@ import (
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
-var (
-	Router *gin.Engine
-	Conn *amqp.Connection
-	Ch *amqp.Channel
-	Err error
-)
-
 func main() {
 	Router = gin.Default()
 

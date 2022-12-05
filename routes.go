@@ -7,10 +7,6 @@ import (
 	"time"
 )
 
-var (
-	Q amqp.Queue
-)
-
 func InitRouter() {
 	Router.POST("/newMessage", func(ctx *gin.Context) {
 		var requestBody message
