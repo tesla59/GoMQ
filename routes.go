@@ -5,9 +5,29 @@ import (
 	"github.com/gin-gonic/gin"
 	amqp "github.com/rabbitmq/amqp091-go"
 	"time"
+	"net/http"
+	"log"
 )
 
 func InitRouter() {
+	Router = gin.Default()
+
+	Server = &http.Server{
+		Addr:    ":7777",
+		Handler: Router,
+	}
+
+	go func() {
+		// service connections
+		if err := Server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("listen: %s\n", err)
+		}
+	}()
+
+	Routes()
+}
+
+func Routes() {
 	Router.POST("/newMessage", func(ctx *gin.Context) {
 		var requestBody message
 		err := ctx.BindJSON(&requestBody)
