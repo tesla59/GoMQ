@@ -1,11 +1,11 @@
 package main
 
 func main() {
-	// Init Routers
-	InitRouter()
-
 	// Setup MQ
 	SetupMQ()
+
+	// Init Routers
+	InitRouter()
 
 	// Exit
 	Exit()

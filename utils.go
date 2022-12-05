@@ -16,9 +16,6 @@ func SetupMQ() {
 	failOnError(Err, "Failed to connect to RabbitMQ")
 	Ch, Err = Conn.Channel()
 	failOnError(Err, "Failed to open a channel")
-
-	defer Conn.Close()
-	defer Ch.Close()
 }
 
 func Exit() {
@@ -32,6 +29,8 @@ func Exit() {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
+	defer Conn.Close()
+	defer Ch.Close()
 	if err := Server.Shutdown(ctx); err != nil {
 		log.Fatal("Server Shutdown:", err)
 	}
